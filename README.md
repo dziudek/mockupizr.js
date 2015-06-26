@@ -1,6 +1,6 @@
 # Mockupizr.js
 
-[![scrollReveal version](https://img.shields.io/github/release/dziudek/mockupizr.svg)](#) [![License](http://img.shields.io/badge/License-MIT-green.svg)](http://opensource.org/licenses/MIT)
+[![scrollReveal version](https://img.shields.io/github/release/dziudek/mockupizr.js.svg)](#) [![License](http://img.shields.io/badge/License-MIT-green.svg)](http://opensource.org/licenses/MIT)
 
 ## Easily animate elements using CSS and data-* attributes
 
