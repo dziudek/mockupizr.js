@@ -1,15 +1,19 @@
 class MockupizrTasks {
-    constructor(instance) {
-        this.parent = instance;
+    constructor() {
     }
 
-    addClass(target, value) {
+    static addClass(target, value) {
         value = value.replace(/'/gim, '');
         target.classList.add(value);
     }
 
-    removeClass(target, value) {
+    static removeClass(target, value) {
         value = value.replace(/'/gim, '');
         target.classList.remove(value);
+    }
+
+    static toggleClass(target, value) {
+        value = value.replace(/'/gim, '');
+        target.classList.toggle(value);
     }
 }

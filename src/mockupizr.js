@@ -9,7 +9,6 @@
 
 class Mockupizr {
     constructor() {
-        this.tasks = new MockupizrTasks(this);
         this.helper = new MockupizrHelper();
         this.find();
         this.iterate();
@@ -42,7 +41,7 @@ class Mockupizr {
             throw new Error('Wrong command length: ' + command.length);
         }
 
-        if (action !== 'add' && action !== 'remove') {
+        if (action !== 'add' && action !== 'remove' && action !== 'toggle') {
             throw new Error('Wrong initial part of command');
         }
 
@@ -62,17 +61,16 @@ class Mockupizr {
             throw new Error('There is no elements for the ' + target + ' selector');
         }
 
-        this.do({
+        this.doIt({
             emmiter: element,
             action: action,
             target: target,
             value: value,
             property: property
         });
-
     }
 
-    do(data) {
+    doIt(data) {
         let selector = data.target.replace(/'/gim, '');
         let elements = document.querySelectorAll(selector);
 
@@ -81,8 +79,7 @@ class Mockupizr {
 
             for(let i = 0; i < elements.length; i++) {
                 let methodName = data.action + this.helper.ucfirst(data.property);
-                console.log(methodName);
-                this.tasks[methodName](elements[i], data.value);
+                MockupizrTasks[methodName](elements[i], data.value);
             }
         }, false);
     }

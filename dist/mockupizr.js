@@ -20,13 +20,11 @@ var MockupizrHelper = (function () {
 })();
 
 var MockupizrTasks = (function () {
-    function MockupizrTasks(instance) {
+    function MockupizrTasks() {
         _classCallCheck(this, MockupizrTasks);
-
-        this.parent = instance;
     }
 
-    _createClass(MockupizrTasks, [{
+    _createClass(MockupizrTasks, null, [{
         key: 'addClass',
         value: function addClass(target, value) {
             value = value.replace(/'/gim, '');
@@ -37,6 +35,12 @@ var MockupizrTasks = (function () {
         value: function removeClass(target, value) {
             value = value.replace(/'/gim, '');
             target.classList.remove(value);
+        }
+    }, {
+        key: 'toggleClass',
+        value: function toggleClass(target, value) {
+            value = value.replace(/'/gim, '');
+            target.classList.toggle(value);
         }
     }]);
 
@@ -77,7 +81,6 @@ var Mockupizr = (function () {
     function Mockupizr() {
         _classCallCheck(this, Mockupizr);
 
-        this.tasks = new MockupizrTasks(this);
         this.helper = new MockupizrHelper();
         this.find();
         this.iterate();
@@ -114,7 +117,7 @@ var Mockupizr = (function () {
                 throw new Error('Wrong command length: ' + command.length);
             }
 
-            if (action !== 'add' && action !== 'remove') {
+            if (action !== 'add' && action !== 'remove' && action !== 'toggle') {
                 throw new Error('Wrong initial part of command');
             }
 
@@ -134,7 +137,7 @@ var Mockupizr = (function () {
                 throw new Error('There is no elements for the ' + target + ' selector');
             }
 
-            this['do']({
+            this.doIt({
                 emmiter: element,
                 action: action,
                 target: target,
@@ -143,8 +146,8 @@ var Mockupizr = (function () {
             });
         }
     }, {
-        key: 'do',
-        value: function _do(data) {
+        key: 'doIt',
+        value: function doIt(data) {
             var _this = this;
 
             var selector = data.target.replace(/'/gim, '');
@@ -155,8 +158,7 @@ var Mockupizr = (function () {
 
                 for (var i = 0; i < elements.length; i++) {
                     var methodName = data.action + _this.helper.ucfirst(data.property);
-                    console.log(methodName);
-                    _this.tasks[methodName](elements[i], data.value);
+                    MockupizrTasks[methodName](elements[i], data.value);
                 }
             }, false);
         }
