@@ -1,0 +1,11 @@
+#showme {
+    display: none;
+}
+
+#showme.active {
+    display: block;
+}
+
+*[data-m] {
+    cursor: pointer;
+}

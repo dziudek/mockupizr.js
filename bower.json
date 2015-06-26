@@ -1,0 +1,22 @@
+{
+  "name":        "mockupizr",
+  "description": "Library for creating HTML mockups with ease",
+  "homepage":    "https://github.com/dziudek/mockupizr.js",
+  "main":        ["dist/mockupizr.js"],
+
+  "authors": ["Tomasz Dziuda"],
+  "license": "MIT",
+
+  "keywords": [
+    "mockup",
+    "library",
+    "JavaScript"
+  ],
+
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/bower_components"
+  ]
+}
