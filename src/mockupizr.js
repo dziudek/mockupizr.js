@@ -4,6 +4,9 @@
 
     data-m="add class 'x' to '#popup'"
     data-m="remove class 'x' from '#popup'"
+    data-m="toggle class 'x' for '#popup'"
+    data-m="add class 'x' to '#popup' on click"
+    data-m="add class 'x' to '#popup' on click,mouseover"
 
  */
 
@@ -36,8 +39,13 @@ class Mockupizr {
         let property = command[1];
         let value = command[2];
         let target = command[4];
+        let events = '';
 
-        if (command.length != 5) {
+        if(command.length > 5) {
+            events = command[6];
+        }
+
+        if (command.length < 5) {
             throw new Error('Wrong command length: ' + command.length);
         }
 
@@ -66,7 +74,8 @@ class Mockupizr {
             action: action,
             target: target,
             value: value,
-            property: property
+            property: property,
+            events: events
         });
     }
 
@@ -74,14 +83,23 @@ class Mockupizr {
         let selector = data.target.replace(/'/gim, '');
         let elements = document.querySelectorAll(selector);
 
-        data.emmiter.addEventListener('click', (e) => {
-            e.preventDefault();
+        if(data.events === '') {
+            data.events = 'click';
+        }
 
-            for(let i = 0; i < elements.length; i++) {
-                let methodName = data.action + this.helper.ucfirst(data.property);
-                MockupizrTasks[methodName](elements[i], data.value);
-            }
-        }, false);
+        data.events = data.events.split(',');
+
+        for(let i = 0; i < data.events.length; i++) {
+            data.emmiter.addEventListener(data.events[i], (e) => {
+                e.preventDefault();
+
+                for(let j = 0; j < elements.length; j++) {
+                    let methodName = data.action + this.helper.ucfirst(data.property);
+                    MockupizrTasks[methodName](elements[j], data.value);
+                }
+            }, false);
+        }
+
     }
 }
 // Run

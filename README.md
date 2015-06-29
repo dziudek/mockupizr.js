@@ -26,3 +26,15 @@ Toggling CSS classes on click:
 ```html
 <a href="#" data-m="toggle class 'active' for '#popup'">Toggle class active for #popup</a>
 ```
+
+Changing CSS classes on hover:
+
+```html
+<a href="#" data-m="toggle class 'active' for '#popup' on mouseover">Toggle class active for #popup</a>
+```
+
+Changing CSS classes on hover and after it:
+
+```html
+<a href="#" data-m="toggle class 'active' for '#popup' on mouseover,mouseout">Toggle class active for #popup</a>
+```

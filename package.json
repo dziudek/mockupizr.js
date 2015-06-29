@@ -1,6 +1,6 @@
 {
   "name": "mockupizr",
-  "version": "0.1.1",
+  "version": "0.2",
   "description": "Library for creating HTML mockups with ease",
   "homepage": "",
   "main": "dist/mockupizr.js",
